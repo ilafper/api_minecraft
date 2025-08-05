@@ -49,10 +49,4 @@ app.get('/api/cartitas', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
 module.exports = app;
