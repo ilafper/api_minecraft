@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 });
 
 // Endpoint GET para obtener usuarios
-app.get('/api/cartas', async (req, res) => {
+app.get('/api/cartitas', async (req, res) => {
   try {
     const { cartas } = await connectToMongoDB();
     const lista_cartas = await cartas.find().toArray();
