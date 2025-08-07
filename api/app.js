@@ -57,7 +57,7 @@ app.post('/api/inventario', async (req, res) => {
     console.log("inventario:", inventario_stok);
     res.json(inventario_stok);
   } catch (error) {
-    console.error("Error al obtener al cartas:", error);
+    console.error("Error al obtener el inventario:", error);
     res.status(500).json({ error: 'Error al obtener las cartas' });
   }
 });
@@ -70,7 +70,7 @@ app.get('/api/invetarioDatos', async (req, res) => {
     console.log("inventario:", inventario_stok);
     res.json(inventario_stok);
   } catch (error) {
-    console.error("Error al obtener al cartas:", error);
+    console.error("Error al obtener datos del inventyario:", error);
     res.status(500).json({ error: 'Error al obtener las cartas' });
   }
 });
