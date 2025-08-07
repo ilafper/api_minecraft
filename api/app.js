@@ -79,7 +79,7 @@ app.post('/api/inventario', async (req, res) => {
     res.json({ mensaje: 'Inventario actualizado correctamente' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error al guardar inventario' });
+    res.status(500).json({ error: 'Error al guardar inventarioaddadad' });
   }
 });
 
