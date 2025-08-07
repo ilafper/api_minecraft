@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Endpoint GET para obtener usuarios
+
 app.get('/api/cartitas', async (req, res) => {
   try {
     const { cartas } = await connectToMongoDB();
@@ -53,25 +53,15 @@ app.get('/api/cartitas', async (req, res) => {
 app.post('/api/inventario', async (req, res) => {
   try {
     const { inventario } = await connectToMongoDB();
-    const inventario_stok = await inventario.find().toArray();
-    console.log("inventario:", inventario_stok);
-    res.json(inventario_stok);
+    const nuevoInventario = req.body;
+
+    const resultado = await inventario.insertOne(nuevoInventario);
+
+    res.json({ mensaje: 'Inventario guardado correctamente', id: resultado.insertedId });
   } catch (error) {
     console.error("Error al guardar el inventario:", error);
     res.status(500).json({ error: 'Error al guardar el inventario' });
   }
 });
 
-
-app.get('/api/invetarioDatos', async (req, res) => {
-  try {
-    const { inventario } = await connectToMongoDB();
-    const inventario_stok = await inventario.find().toArray();
-    console.log("inventario:", inventario_stok);
-    res.json(inventario_stok);
-  } catch (error) {
-    console.error("Error al obtener datos del inventyario:", error);
-    res.status(500).json({ error: 'Error al obtener las cartas' });
-  }
-});
 module.exports = app;
