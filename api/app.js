@@ -57,8 +57,8 @@ app.post('/api/inventario', async (req, res) => {
     console.log("inventario:", inventario_stok);
     res.json(inventario_stok);
   } catch (error) {
-    console.error("Error al obtener el inventario:", error);
-    res.status(500).json({ error: 'Error al obtener las cartas' });
+    console.error("Error al guardar el inventario:", error);
+    res.status(500).json({ error: 'Error al guardar el inventario' });
   }
 });
 
