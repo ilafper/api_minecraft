@@ -21,7 +21,7 @@ async function connectToMongoDB() {
     const db = client.db('minecraft');
     return {
       cartas: db.collection('cartas'),
-      invetario: db.collection('inventario')
+      inventario: db.collection('inventario')
       
     };
   } catch (error) {
@@ -47,6 +47,17 @@ app.get('/api/cartitas', async (req, res) => {
   } catch (error) {
     console.error("Error al obtener al cartas:", error);
     res.status(500).json({ error: 'Error al obtener las cartas' });
+  }
+});
+app.get('/api/inventarioDatos', async (req, res) => {
+  try {
+    const { inventario } = await connectToMongoDB();
+    const lista_inve = await cartas.find().toArray();
+    console.log("inventarioGET:", lista_inve);
+    res.json(lista_inve);
+  } catch (error) {
+    console.error("Error al obtener INVENTARIOGET:", error);
+    res.status(500).json({ error: 'Error al obtener EL INVENTARIOGET' });
   }
 });
 
