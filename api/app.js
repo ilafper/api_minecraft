@@ -49,10 +49,12 @@ app.get('/api/cartitas', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener las cartas' });
   }
 });
+
+
 app.get('/api/inventarioDatos', async (req, res) => {
   try {
     const { inventario } = await connectToMongoDB();
-    const lista_inve = await cartas.find().toArray();
+    const lista_inve = await inventario.find().toArray();
     console.log("inventarioGET:", lista_inve);
     res.json(lista_inve);
   } catch (error) {
