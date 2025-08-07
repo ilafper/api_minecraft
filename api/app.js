@@ -64,24 +64,23 @@ app.get('/api/inventarioDatos', async (req, res) => {
 });
 
 app.post('/api/inventario', async (req, res) => {
+  const { inventario } = await connectToMongoDB();
   const { packsAbiertos, cartasTotales, totalComunes, totalEpicas, totalRaras, totalLegendarias, cartas } = req.body;
 
   try {
-    // Actualizar el único documento en la colección, o crear uno nuevo si no existe
-    await Inventario.updateOne(
-      {},                // Sin filtro, para afectar el primer documento que encuentre
-      {
-        $set: { packsAbiertos, cartasTotales, totalComunes, totalEpicas, totalRaras, totalLegendarias, cartas }
-      },
-      { upsert: true }    // Si no hay documento, lo crea
+    await inventario.updateOne(
+      {},  // filtro vacío: actualiza el primer documento que encuentre
+      { $set: { packsAbiertos, cartasTotales, totalComunes, totalEpicas, totalRaras, totalLegendarias, cartas } },
+      { upsert: true } // crea documento si no existe
     );
 
     res.json({ mensaje: 'Inventario actualizado correctamente' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error al guardar inventarioaddadad' });
+    res.status(500).json({ error: 'Error al guardar inventario' });
   }
 });
+
 
 
 
